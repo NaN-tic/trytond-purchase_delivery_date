@@ -20,7 +20,7 @@ class PurchaseLine:
 
     @fields.depends('product', 'quantity', 'delivery_date',
         '_parent_purchase.purchase_date', '_parent_purchase.party')
-    def on_change_with_delivery_date(self):
+    def on_change_with_delivery_date(self, name=None):
         if self.delivery_date:
             return self.delivery_date
         if not self.product or not self.quantity:
