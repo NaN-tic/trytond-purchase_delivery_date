@@ -1,3 +1,5 @@
+* Add manual_delivery_date column to purchase.line lists
+
 Version 3.4.1 - 2015-03-03
 * Use auxiliar field instead of redefine original functional one
 
