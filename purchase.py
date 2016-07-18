@@ -21,6 +21,11 @@ class PurchaseLine:
             depends=['type', 'quantity'])
 
     @classmethod
+    def __setup__(cls):
+        super(PurchaseLine, cls).__setup__()
+        cls.delivery_date.states['invisible'] = True
+
+    @classmethod
     def __register__(cls, module_name):
         TableHandler = backend.get('TableHandler')
         cursor = Transaction().connection.cursor()
@@ -49,3 +54,4 @@ class PurchaseLine:
     @fields.depends('manual_delivery_date')
     def on_change_with_delivery_date(self, name=None):
         return self.manual_delivery_date
+
