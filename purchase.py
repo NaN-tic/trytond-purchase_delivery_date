@@ -14,11 +14,14 @@ __metaclass__ = PoolMeta
 
 class PurchaseLine:
     __name__ = 'purchase.line'
-    requested_delivery_date = fields.Date('Fecha de entrega requerida',
+
+    requested_delivery_date = fields.Date(
+        'Fecha de entrega requerida',
         states={
-            'invisible': ((Eval('type') != 'line')
-                | (If(Bool(Eval('quantity')), Eval('quantity', 0), 0)
-                    <= 0)),
+            'invisible': (
+                (Eval('type') != 'line') |
+                (If(Bool(Eval('quantity')), Eval('quantity', 0), 0) <= 0)
+            ),
         },
         depends=['type', 'quantity'])
 
@@ -31,16 +34,16 @@ class PurchaseLine:
         # Migration from 3.2
         table = TableHandler(cls, module_name)
         move_delivery_dates = (
-            not table.column_exist('requested_delivery_date')
-            and table.column_exist('delivery_date')
+            not table.column_exist('requested_delivery_date') and
+            table.column_exist('delivery_date')
         )
 
         # Because of the change of the field's name manual_delivery_date to
         # requested_delivery_date
-        if (table.column_exist('manual_delivery_date')
-                and not table.column_exist('requested_delivery_date')):
+        if (table.column_exist('manual_delivery_date') and
+                not table.column_exist('requested_delivery_date')):
             table.column_rename('manual_delivery_date',
-                'requested_delivery_date')
+                                'requested_delivery_date')
 
         super(PurchaseLine, cls).__register__(module_name)
 
@@ -55,7 +58,7 @@ class PurchaseLine:
         if self.requested_delivery_date:
             return self.requested_delivery_date
         return super(PurchaseLine,
-            self).on_change_with_delivery_date(name='delivery_date')
+                     self).on_change_with_delivery_date(name='delivery_date')
 
     @fields.depends('requested_delivery_date', 'moves')
     def on_change_with_delivery_date(self, name=None):
