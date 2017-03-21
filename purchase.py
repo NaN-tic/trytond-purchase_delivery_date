@@ -16,7 +16,7 @@ class PurchaseLine:
     __name__ = 'purchase.line'
 
     requested_delivery_date = fields.Date(
-        'Fecha de entrega requerida',
+        'Requested Delivery Date',
         states={
             'invisible': (
                 (Eval('type') != 'line') |
