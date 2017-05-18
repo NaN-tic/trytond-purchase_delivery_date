@@ -13,5 +13,5 @@ class PurchaseDeliveryDateTestCase(ModuleTestCase):
 def suite():
     suite = trytond.tests.test_tryton.suite()
     suite.addTests(unittest.TestLoader().loadTestsFromTestCase(
-            PurchaseDeliveryDateTestCase))
+        PurchaseDeliveryDateTestCase))
     return suite
