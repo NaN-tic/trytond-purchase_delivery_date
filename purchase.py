@@ -60,9 +60,7 @@ class PurchaseLine:
         return super(PurchaseLine,
                      self).on_change_with_delivery_date(name='delivery_date')
 
-    @fields.depends('requested_delivery_date', 'moves')
+    @fields.depends('requested_delivery_date')
     def on_change_with_delivery_date(self, name=None):
-        if self.moves:
-            return super(PurchaseLine, self).on_change_with_delivery_date()
-        else:
-            return self.requested_delivery_date
+        return self.requested_delivery_date or super(PurchaseLine,
+            self).on_change_with_delivery_date()
