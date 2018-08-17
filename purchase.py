@@ -7,11 +7,11 @@ from trytond.pyson import Bool, Eval, If
 from trytond.transaction import Transaction
 
 __all__ = ['PurchaseLine']
-__metaclass__ = PoolMeta
 
 
 class PurchaseLine:
     __name__ = 'purchase.line'
+    __metaclass__ = PoolMeta
 
     requested_delivery_date = fields.Date(
         'Requested Delivery Date',
