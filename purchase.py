@@ -56,7 +56,8 @@ class PurchaseLine:
                 values=[sql_table.delivery_date]))
             table.drop_column('delivery_date')
 
-    @fields.depends('requested_delivery_date', methods=['delivery_date'])
+    @fields.depends('requested_delivery_date',
+        methods=['on_change_with_delivery_date'])
     def on_change_with_requested_delivery_date(self):
         if self.requested_delivery_date:
             return self.requested_delivery_date
