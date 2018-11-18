@@ -1,7 +1,11 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "field:purchase.line,manual_delivery_date:"
 msgid "Delivery Date"
 msgstr "Data de lliurament"
+
+msgctxt "field:purchase.line,requested_delivery_date:"
+msgid "Requested Delivery Date"
+msgstr "Data Sol·licitada"
